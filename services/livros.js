@@ -10,7 +10,30 @@ function getLivroId(id) {
     return livroFiltrado
 }    
 
-module.exports ={
-    getAllLivros,
-    getLivroId
+function insereLivro(novoLivro) {
+    const livrosAtual = JSON.parse(fs.readFileSync("dados.json"))
+    const livroNovo = [...livrosAtual, novoLivro]
+    fs.writeFileSync("dados.json", JSON.stringify(livroNovo))
+}
+
+function modificaLivros(modificacao, id) {
+    let livrosAtuais= JSON.parse(fs.readFileSync("dados.json"))
+    const indiceModificado = livrosAtuais.findIndex(livro => livro.id === id)
+
+    const livroModificado = {...livrosAtuais[indiceModificado], ...modificacao}
+
+    livrosAtuais[indiceModificado] = livroModificado
+
+    fs.writeFileSync("dados.json", JSON.stringify(livrosAtuais))
+}
+
+function deletarLivroId(id) {
+    const livrosAtuais = JSON.parse(fs.readFileSync("dados.json"))
+
+    const livrosFiltrados = livrosAtuais.filter(livro => livro.id!== id )
+    fs.writeFileSync("dados.json", JSON.stringify(livrosFiltrados))
+}
+
+module.exports = {
+    getAllLivros, getLivroId, insereLivro, modificaLivros, deletarLivroId
 }

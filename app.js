@@ -3,6 +3,7 @@ const rotaLivros = require("./routes/livros")
 
 const app = express()
 
+app.use(express.json())
 
 app.use("/livros", rotaLivros)
 
