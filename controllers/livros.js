@@ -3,7 +3,7 @@ const { getAllLivros, getLivroId, insereLivro, modificaLivros, deletarLivroId } 
 function getLivros(req, res) {
     try {
         const livros = getAllLivros()
-        res.send(livros)
+        res.send(livros).status(200)
     } catch (error) {
         res.status(500)
         res.send(error.message)
@@ -28,13 +28,20 @@ function getLivro (req, res) {
     }
 } 
 
-function postLivro(req, res) {
+async function postLivro(req, res) {
     try {
         const livroNovo = req.body
         if (req.body.nome) {
             insereLivro(livroNovo)
             res.send("Livro inserido com secesso!")
             res.status(201)
+
+            const response = await LivroModel.create(Livro)
+
+            if(!response){
+                return res.status(400).send({message: "error"})
+            }
+
         } else {
             res.status(422)
             res.send("Campo é obrigatório")
@@ -45,7 +52,7 @@ function postLivro(req, res) {
         res.send(error.message)
     }
 }
-
+ 
 function pathLivro(req, res) {
     try {
         const id = req.params.id
@@ -82,5 +89,7 @@ function deleteLivro(req, res) {
         res.send(error.message)
     }
 }
+
+
 
 module.exports = { getLivros, getLivro, postLivro, pathLivro, deleteLivro }
