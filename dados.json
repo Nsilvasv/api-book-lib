@@ -1,1 +1,7 @@
-[{"id":"1","nome":"Entendendo algoritmos"},{"id":"2","nome":"Js"},{"id":"3","nome":"Guia básico de C#"},{"id":"4","nome":"Código Limpo"},{"id":"5","nome":"JavaScript para iniciantes"}]
+[
+    {"id":"1","nome":"Entendendo algoritmos"},
+    {"id":"2","nome":"Js"},
+    {"id":"3","nome":"Guia básico de C#"},
+    {"id":"4","nome":"Código Limpo"},
+    {"id":"5","nome":"Python para iniciantes"}
+]
